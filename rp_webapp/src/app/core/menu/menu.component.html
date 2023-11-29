@@ -1,0 +1,13 @@
+<mat-list>
+  <h2>Reading Plan</h2>
+  @for (item of menuList; track item) {
+    <mat-list-item [routerLink]="[item.link]">
+      <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+      <div matListItemTitle>{{item.name}}</div>
+      <div matListItemLine></div>
+    </mat-list-item>
+  }
+  <mat-divider></mat-divider>
+  <div mat-subheader>Settings</div>
+
+</mat-list>
