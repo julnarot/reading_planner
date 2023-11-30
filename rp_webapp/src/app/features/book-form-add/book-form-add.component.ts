@@ -59,9 +59,8 @@ export class BookFormAddComponent {
   onSave() {
     if (this.bookForm.valid)
       this.service.addApi$(this.bookForm.value).subscribe((book) => {
-        this.service.addBook(this.bookForm.value);
+        this.service.addBook(book);
         this.dialogRef.close();
       });
-    console.log(this.bookForm.value);
   }
 }

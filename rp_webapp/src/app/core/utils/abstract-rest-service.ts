@@ -12,9 +12,9 @@ export abstract class AbstractRestService<T> {
       .get(`${this.url}${id}`)
       .pipe(map((resp) => resp as T));
   }
-  addApi$(id: number): Observable<T> {
+  addApi$(instance: T): Observable<T> {
     return this._http
-      .get(`${this.url}${id}`)
+      .post(`${this.url}`, instance)
       .pipe(map((resp) => resp as T));
   }
 }
