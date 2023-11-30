@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
@@ -41,16 +41,22 @@ export interface Book {
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss',
 })
-export class BooksComponent {
+export class BooksComponent implements OnInit {
   books: Observable<Book[]> = this.bookService.getBooks$;
   categories$: Observable<string[]> = this.bookService.getBooksCategories$;
 
   constructor(
     private readonly bookService: BookService,
     public dialog: MatDialog
-    ) {}
+  ) {}
+
+  ngOnInit() {
+    this.bookService.getAllApi$().subscribe((books) => {
+      this.bookService.setBooks(books);
+    });
+  }
   addBook() {
-     this.dialog.open(BookFormAddComponent, {
+    this.dialog.open(BookFormAddComponent, {
       data: {},
     });
   }
