@@ -1,0 +1,42 @@
+<div class="dashboard-container">
+  <div fxLayout="column">
+    <div fxFlex="100%">
+      <div fxFlex="80%">
+        <h2>Books</h2>
+      </div>
+      <div fxFlex>
+        <button mat-button [matMenuTriggerFor]="menu">Category</button>
+        <mat-menu #menu="matMenu">
+          @for (category of categories$ | async; track $index) {
+          <button mat-menu-item>{{ category }}</button>
+          }
+        </mat-menu>
+      </div>
+      <button mat-button (click)="addBook()">Add</button>
+    </div>
+  </div>
+  <div fxLayout="column">
+    @for (book of books | async; track $index) {
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ book.title }}</mat-card-title>
+        <mat-card-subtitle>{{ book.category }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="book.coverImage" alt="{{ book.title }}" />
+      <mat-card-content>
+        <p>{{ book|json }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+    } @empty {
+    <div fxLayout="column">
+      <div fxFlex="100%">
+        <mat-card>
+          <mat-card-content class="text-center"> not found </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    }
+  </div>
+</div>

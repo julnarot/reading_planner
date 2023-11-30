@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
-import { BooksComponent } from './components/books/books.component';
+import { BooksComponent } from './features/books/books.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path: 'books',
     component: BooksComponent,
-    data: { title: 'Dashboard' },
+    data: { title: 'Books' },
   },
   { path: '**', component: PageNotFoundComponent },
 ];
