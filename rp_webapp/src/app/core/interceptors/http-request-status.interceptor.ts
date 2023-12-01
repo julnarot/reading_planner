@@ -21,7 +21,7 @@ export const httpRequestStatusInterceptor: HttpInterceptorFn = (req, next) => {
         if (success instanceof HttpResponse) {
           switch (success.status) {
             case HttpRequestStatus.Created:
-              snackBar.open('success');
+              snackBar.open(`🟢 ${success.statusText}`, '', snackBarConf);
               break;
           }
         }
@@ -35,6 +35,6 @@ export const httpRequestStatusInterceptor: HttpInterceptorFn = (req, next) => {
           }
         }
       }
-    )
+    ),
   );
 };
