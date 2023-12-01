@@ -35,3 +35,6 @@ export const BOOK_CATEGORIES = [
   'Religious books',
   'Other',
 ];
+
+
+export const SNACKBARTIMEOUT = 5000;

@@ -7,9 +7,13 @@ import { inject } from '@angular/core';
 import { tap } from 'rxjs';
 import { HttpRequestStatus } from '../models/http-request-status';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SNACKBARTIMEOUT } from '../utils/constants';
 
 export const httpRequestStatusInterceptor: HttpInterceptorFn = (req, next) => {
   const snackBar = inject(MatSnackBar);
+  const snackBarConf = {
+    duration: SNACKBARTIMEOUT,
+  };
 
   return next(req).pipe(
     tap(
@@ -26,7 +30,7 @@ export const httpRequestStatusInterceptor: HttpInterceptorFn = (req, next) => {
         if (exception instanceof HttpErrorResponse) {
           switch (exception.status) {
             case HttpRequestStatus.NotFound:
-              snackBar.open('Resource not found');
+              snackBar.open(`🔴 ${exception.message}`, '', snackBarConf);
               break;
           }
         }
