@@ -24,8 +24,8 @@ public class Book {
     private String title;
     @Column(nullable = false)
     private String category;
-    private String subtitle;
-    private String bookAbstract;
+    private String author;
+    private String epilogue;
     private Long numPages;
     private String coverImageUrl;
     @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
