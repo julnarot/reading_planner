@@ -5,7 +5,7 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'read',
     component: DashboardComponent,
     children: [
 

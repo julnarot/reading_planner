@@ -1,11 +1,26 @@
-<div fxLayout="column" class="zero">
-  <div fxFlex="33" class="one">1</div>
-  <div fxFlex="33%" class="two">
-    2
-    <div fxFlex="22%" class="two_one">21</div>
-    <div fxFlex="205px" class="two_two">22</div>
-    <div fxFlex="30" class="two_three">23</div>
-  </div>
-  <div fxFlex class="three">3</div>
-</div>
+<button mat-button [matMenuTriggerFor]="menu">Books</button>
+<mat-menu #menu="matMenu">
+  <div mat-subheader>Chose book</div>
+  @for (book of books$ | async; track $index) {
+  <button aria-label="book" mat-menu-item (click)="onSelectBook(book)">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="menu_book"
+    ></mat-icon>
+    {{ book.title }}
+  </button>
+  }
+  <mat-divider></mat-divider>
+  <button aria-label="new book" mat-menu-item routerLink="/books">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="add"
+    ></mat-icon>
+    New
+  </button>
+</mat-menu>
+
+<pre>{{ book | json }}</pre>
 <router-outlet></router-outlet>
