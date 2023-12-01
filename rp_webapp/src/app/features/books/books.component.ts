@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
@@ -9,22 +9,18 @@ import { BookService } from './services/book.service';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
 } from '@angular/material/dialog';
 import { BookFormAddComponent } from '../book-form-add/book-form-add.component';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 export interface Book {
   title: string;
   category: string;
-  subtitle?: string;
-  abstract?: string;
+  author?: string;
+  epilogue?: string;
   numPages?: number;
-  coverImage?: string;
+  coverImageUrl?: string;
 }
 
 @Component({
@@ -34,23 +30,30 @@ export interface Book {
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatMenuModule,
+    MatIconModule,
     MatCardModule,
     HttpClientModule,
+    RouterLink
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss',
 })
-export class BooksComponent {
+export class BooksComponent implements OnInit {
   books: Observable<Book[]> = this.bookService.getBooks$;
-  categories$: Observable<string[]> = this.bookService.getBooksCategories$;
+
 
   constructor(
     private readonly bookService: BookService,
     public dialog: MatDialog
-    ) {}
+  ) {}
+
+  ngOnInit() {
+    this.bookService.getAllApi$().subscribe((books) => {
+      this.bookService.setBooks(books);
+    });
+  }
   addBook() {
-     this.dialog.open(BookFormAddComponent, {
+    this.dialog.open(BookFormAddComponent, {
       data: {},
     });
   }
