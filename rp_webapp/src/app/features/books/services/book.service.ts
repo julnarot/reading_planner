@@ -8,6 +8,7 @@ import { AbstractRestService } from '../../../core/utils/abstract-rest-service';
   providedIn: 'root',
 })
 export class BookService extends AbstractRestService<Book> {
+  baseUrl = 'http://localhost:8080/';
   private readonly books$$: BehaviorSubject<Book[]> = new BehaviorSubject<
     Book[]
   >([]);
@@ -18,7 +19,7 @@ export class BookService extends AbstractRestService<Book> {
   );
 
   constructor(http: HttpClient) {
-    super(http, 'books');
+    super(http, 'http://localhost:8080/books');
   }
 
   getAllByCategory(category: string): Observable<Book[]> {
