@@ -21,17 +21,7 @@ export class MenuComponent {
     {
       name: 'Read',
       icon: 'folder',
-      link: '/read'
-    },
-    {
-      name: 'books',
-      icon: 'folder',
-      link: '/books'
-    },
-    {
-      name: 'Store',
-      icon: 'folder',
-      link: '/store'
+      link: '/read',
     },
   ];
 }

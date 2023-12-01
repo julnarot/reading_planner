@@ -14,7 +14,10 @@ import { IForm } from '../../core/utils/rp-types';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { BOOK_CATEGORIES } from '../../core/utils/constants';
+import {
+  BOOK_CATEGORIES,
+  DEFAULT_COVER_IMAGE_URL,
+} from '../../core/utils/constants';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { BookService } from '../books/services/book.service';
@@ -50,10 +53,10 @@ export class BookFormAddComponent {
         BOOK_CATEGORIES[BOOK_CATEGORIES.length - 1],
         Validators.required
       ),
-      subtitle: new FormControl(),
-      abstract: new FormControl(),
+      author: new FormControl(),
+      epilogue: new FormControl(),
       numPages: new FormControl(),
-      coverImage: new FormControl(),
+      coverImageUrl: new FormControl(DEFAULT_COVER_IMAGE_URL),
     });
   }
   onSave() {
