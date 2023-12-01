@@ -5,30 +5,43 @@
         <h2>Books</h2>
       </div>
       <div fxFlex>
-        <button mat-button [matMenuTriggerFor]="menu">Category</button>
-        <mat-menu #menu="matMenu">
-          @for (category of categories$ | async; track $index) {
-          <button mat-menu-item>{{ category }}</button>
-          }
-        </mat-menu>
+        <button mat-button (click)="addBook()">Add</button>
       </div>
-      <button mat-button (click)="addBook()">Add</button>
     </div>
   </div>
   <div fxLayout="column">
     @for (book of books | async; track $index) {
     <mat-card class="example-card">
       <mat-card-header>
-        <mat-card-title>{{ book.title }}</mat-card-title>
-        <mat-card-subtitle>{{ book.category }}</mat-card-subtitle>
+        <mat-card-title-group>
+          <mat-card-title>{{ book.title }}</mat-card-title>
+          <mat-card-subtitle>{{ book.category }}</mat-card-subtitle>
+          <img mat-card-sm-image [src]="book.coverImageUrl" />
+        </mat-card-title-group>
       </mat-card-header>
-      <img mat-card-image [src]="book.coverImage" alt="{{ book.title }}" />
       <mat-card-content>
-        <p>{{ book|json }}</p>
+        {{ book.epilogue }}
       </mat-card-content>
       <mat-card-actions>
+        <button
+          mat-icon-button
+          aria-label="Example icon button with a vertical three dot icon"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          aria-label="Example icon button with a heart icon"
+        >
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" routerLink="/read">
+          Read
+        </button>
       </mat-card-actions>
     </mat-card>
+
     } @empty {
     <div fxLayout="column">
       <div fxFlex="100%">

@@ -9,22 +9,18 @@ import { BookService } from './services/book.service';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
 } from '@angular/material/dialog';
 import { BookFormAddComponent } from '../book-form-add/book-form-add.component';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 export interface Book {
   title: string;
   category: string;
-  subtitle?: string;
-  abstract?: string;
+  author?: string;
+  epilogue?: string;
   numPages?: number;
-  coverImage?: string;
+  coverImageUrl?: string;
 }
 
 @Component({
@@ -34,16 +30,17 @@ export interface Book {
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatMenuModule,
+    MatIconModule,
     MatCardModule,
     HttpClientModule,
+    RouterLink
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss',
 })
 export class BooksComponent implements OnInit {
   books: Observable<Book[]> = this.bookService.getBooks$;
-  categories$: Observable<string[]> = this.bookService.getBooksCategories$;
+
 
   constructor(
     private readonly bookService: BookService,
