@@ -20,4 +20,9 @@ export abstract class AbstractRestService<T> {
       .delete(`${this.url}/${id}`)
       .pipe(map((resp) => resp as T));
   }
+  updateApi$(id: number, instance: T): Observable<T> {
+    return this._http
+      .put(`${this.url}/${id}`, instance)
+      .pipe(map((resp) => resp as T));
+  }
 }

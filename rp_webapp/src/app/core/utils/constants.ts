@@ -37,5 +37,5 @@ export const BOOK_CATEGORIES = [
 ];
 
 export const SNACKBARTIMEOUT = 5000;
-export const DEFAULT_COVER_IMAGE_URL =
-  'https://img.freepik.com/premium-vector/hand-drawn-world-book-day-concept_23-2148481516.jpg?size=250&ext=jpg&ga=GA1.1.1413502914.1696550400&semt=ais';
+export const DEFAULT_COVER_IMAGE_URL: string =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkSenGcBScqxajGbHY_QpQ9X1UTCUPEDUjSA&usqp=CAU';
