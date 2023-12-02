@@ -2,41 +2,68 @@
   <div fxLayout="column">
     <div fxFlex="100%">
       <div fxFlex="80%">
-        <h2>Books</h2>
+        <h1>Books</h1>
       </div>
       <div fxFlex>
-        <button mat-button (click)="addBook()">Add</button>
+        <button mat-fab extended color="secondary" (click)="addBook()">
+          <mat-icon>add</mat-icon>
+          Add
+        </button>
       </div>
     </div>
   </div>
+
   <div fxLayout="column">
-    @for (book of books | async; track $index) {
+    @defer () { @for (book of books | async; track $index) {
     <mat-card class="example-card">
       <mat-card-header>
         <mat-card-title-group>
-          <mat-card-title>{{ book.title }}</mat-card-title>
+          <mat-card-title>{{ book.title | uppercase }}</mat-card-title>
           <mat-card-subtitle>{{ book.category }}</mat-card-subtitle>
-          <img mat-card-sm-image [src]="book.coverImageUrl" />
+          <img
+            mat-card-sm-image
+            [src]="book.coverImageUrl || defCoverUrlImg"
+            alt="{{ book.title }}"
+          />
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
         {{ book.epilogue }}
       </mat-card-content>
-      <mat-card-actions>
-        <button
-          mat-icon-button
-          aria-label="Example icon button with a vertical three dot icon"
-        >
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          color="warn"
-          aria-label="Example icon button with a heart icon"
-        >
-          <mat-icon>favorite</mat-icon>
-        </button>
+      <mat-card-actions class="card-actions">
+        <div>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button aria-label="book" mat-menu-item (click)="onDelete(book)">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="delete"
+                fontIcon="delete"
+              ></mat-icon>
+              Delete
+            </button>
+            <button aria-label="edit" mat-menu-item (click)="onUpdate(book)">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="update"
+                fontIcon="edit"
+              ></mat-icon>
+              Update
+            </button>
+          </mat-menu>
+
+          <button mat-icon-button color="warn" aria-label="favorite" disabled>
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </div>
         <button mat-raised-button color="primary" routerLink="/read">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="read"
+            fontIcon="menu_book"
+          ></mat-icon>
           Read
         </button>
       </mat-card-actions>
@@ -50,6 +77,6 @@
         </mat-card>
       </div>
     </div>
-    }
+    } } @placeholder { ... } @loading { book is loading...! }
   </div>
 </div>

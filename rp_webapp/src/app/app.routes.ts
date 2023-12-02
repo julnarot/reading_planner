@@ -17,5 +17,6 @@ export const routes: Routes = [
     component: BooksComponent,
     data: { title: 'Books' },
   },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', redirectTo: 'books' },
+  // { path: '**', component: PageNotFoundComponent },
 ];

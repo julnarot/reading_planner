@@ -4,7 +4,8 @@
 
 /*card*/
 .example-card {
-  max-width: 400px;
+  max-width: 362px;
+  margin: 3px;
 }
 
 .example-header-image {
@@ -12,3 +13,7 @@
   background-size: cover;
 }
 
+.card-actions {
+  flex: content;
+  justify-content: space-between;
+}

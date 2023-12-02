@@ -23,6 +23,9 @@ export const httpRequestStatusInterceptor: HttpInterceptorFn = (req, next) => {
             case HttpRequestStatus.Created:
               snackBar.open(`🟢 ${success.statusText}`, '', snackBarConf);
               break;
+            case HttpRequestStatus.NoContent:
+              snackBar.open(`🔵 Deleted`, '', snackBarConf);
+              break;
           }
         }
       },
