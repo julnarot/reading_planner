@@ -8,13 +8,16 @@ export abstract class AbstractRestService<T> {
     return this._http.get(this.url).pipe(map((resp) => resp as T[]));
   }
   getByIdApi$(id: number): Observable<T> {
-    return this._http
-      .get(`${this.url}${id}`)
-      .pipe(map((resp) => resp as T));
+    return this._http.get(`${this.url}${id}`).pipe(map((resp) => resp as T));
   }
   addApi$(instance: T): Observable<T> {
     return this._http
       .post(`${this.url}`, instance)
+      .pipe(map((resp) => resp as T));
+  }
+  deleteApi$(id: number): Observable<T> {
+    return this._http
+      .delete(`${this.url}/${id}`)
       .pipe(map((resp) => resp as T));
   }
 }
