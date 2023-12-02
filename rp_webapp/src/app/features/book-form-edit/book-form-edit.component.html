@@ -1,0 +1,56 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSave()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Add book</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="row">
+        <div fxFlex="20">
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" />
+            @if (bookForm.get('title')?.invalid) {
+            <mat-error>field is required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              @for (category of bookCategories; track $index) {
+              <mat-option [value]="category">{{ category }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input matInput formControlName="author" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Image url</mat-label>
+            <input matInput formControlName="coverImageUrl" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Number pages</mat-label>
+            <input matInput type="number" formControlName="numPages" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="20">
+          <mat-form-field>
+            <mat-label>Epilogue</mat-label>
+            <textarea matInput formControlName="epilogue"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button
+        mat-button
+        color="primary"
+        type="submit"
+        [disabled]="bookForm.invalid"
+      >
+        Save
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
