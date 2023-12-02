@@ -31,7 +31,10 @@ export class BookService extends AbstractRestService<Book> {
     this.setBooks([...this.books$$.value, book]);
   }
 
-  deleteBook(book: any): void {
+  deleteBook(book: Book): void {
     this.setBooks(this.books$$.value.filter((b) => b !== book));
+  }
+  updateBook(book: Book): void {
+    this.setBooks(this.books$$.value.map((b) => (b.id === book.id ? book : b)));
   }
 }

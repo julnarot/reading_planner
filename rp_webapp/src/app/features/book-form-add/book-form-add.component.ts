@@ -16,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {
   BOOK_CATEGORIES,
-  DEFAULT_COVER_IMAGE_URL,
 } from '../../core/utils/constants';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -56,14 +55,14 @@ export class BookFormAddComponent {
       author: new FormControl(),
       epilogue: new FormControl(),
       numPages: new FormControl(),
-      coverImageUrl: new FormControl(DEFAULT_COVER_IMAGE_URL),
     });
   }
   onSave() {
-    if (this.bookForm.valid)
+    if (this.bookForm.valid) {
       this.service.addApi$(this.bookForm.value).subscribe((book) => {
         this.service.addBook(book);
         this.dialogRef.close();
       });
+    }
   }
 }

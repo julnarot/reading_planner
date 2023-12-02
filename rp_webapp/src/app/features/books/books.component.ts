@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { BookFormAddComponent } from '../book-form-add/book-form-add.component';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { BookFormEditComponent } from '../book-form-edit/book-form-edit.component';
+import { DEFAULT_COVER_IMAGE_URL } from '../../core/utils/constants';
 
 export interface Book {
   id: number;
@@ -41,6 +43,7 @@ export interface Book {
 export class BooksComponent implements OnInit, OnDestroy {
   books: Observable<Book[]> = this.bookService.getBooks$;
   unsubscribe: Subject<void> = new Subject();
+  defCoverUrlImg = DEFAULT_COVER_IMAGE_URL;
   constructor(
     private readonly bookService: BookService,
     public dialog: MatDialog
@@ -70,6 +73,13 @@ export class BooksComponent implements OnInit, OnDestroy {
         });
     }
   }
+
+  onUpdate(book: Book): void {
+    this.dialog.open(BookFormEditComponent, {
+      data: book,
+    });
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
